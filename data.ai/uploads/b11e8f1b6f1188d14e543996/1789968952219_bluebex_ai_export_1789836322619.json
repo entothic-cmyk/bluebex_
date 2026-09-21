@@ -1,0 +1,80 @@
+[
+  {
+    "id": "chat_discord_bot",
+    "title": "Discord Ticket Bot Code",
+    "category": "Today",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Can you provide the complete setup for a Discord Ticket Bot with config and index.js?"
+      },
+      {
+        "role": "assistant",
+        "reasoning": "Thinking Process:\n1. Analyze requirements for Discord ticket bot in Node.js\n2. Outline dependency installation steps (discord.js, dotenv)\n3. Formulate config.json structure for bot token & channel IDs\n4. Write robust index.js code with event handlers and button interactions.",
+        "blocks": [
+          {
+            "type": "text",
+            "content": "Here is the complete setup guide and full code to build a feature-rich Discord Ticket Bot."
+          },
+          {
+            "type": "section",
+            "number": 1,
+            "title": "Install Dependencies"
+          },
+          {
+            "type": "code",
+            "language": "bash",
+            "fileName": "install.sh",
+            "code": "npm init -y\nnpm install discord.js dotenv"
+          },
+          {
+            "type": "section",
+            "number": 2,
+            "title": "config.json"
+          },
+          {
+            "type": "code",
+            "language": "json",
+            "fileName": "config.json",
+            "code": "{\n  \"token\": \"YOUR_BOT_TOKEN_HERE\",\n  \"prefix\": \"!\",\n  \"ticketCategoryId\": \"CATEGORY_ID_HERE\",\n  \"supportRoleId\": \"SUPPORT_ROLE_ID_HERE\",\n  \"transcriptChannelId\": \"TRANSCRIPT_CHANNEL_ID_HERE\"\n}"
+          },
+          {
+            "type": "section",
+            "number": 3,
+            "title": "index.js (Main Bot File)"
+          },
+          {
+            "type": "code",
+            "language": "javascript",
+            "fileName": "index.js",
+            "code": "const { Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, PermissionsBitField } = require('discord.js');\nconst config = require('./config.json');\n\nconst client = new Client({\n    intents: [\n        GatewayIntentBits.Guilds,\n        GatewayIntentBits.GuildMessages,\n        GatewayIntentBits.MessageContent\n    ]\n});\n\nclient.once('ready', () => {\n    console.log(`[BlueBex AI] Logged in as ${client.user.tag}`);\n});\n\nclient.on('messageCreate', async (message) => {\n    if (message.content === '!setup-ticket') {\n        const embed = new EmbedBuilder()\n            .setTitle('Support Ticket System')\n            .setDescription('Click the button below to create a private support ticket.')\n            .setColor(0x3b82f6);\n\n        const row = new ActionRowBuilder()\n            .addComponents(\n                new ButtonBuilder()\n                    .setCustomId('create_ticket')\n                    .setLabel('Create Ticket')\n                    .setStyle(ButtonStyle.Primary)\n            );\n\n        await message.channel.send({ embeds: [embed], components: [row] });\n    }\n});\n\nclient.login(config.token);"
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "hellow"
+      }
+    ]
+  },
+  {
+    "id": "chat_react_dashboard",
+    "title": "React Dashboard Setup",
+    "category": "Previous 7 Days",
+    "messages": [
+      {
+        "role": "user",
+        "content": "How do I setup Tailwind CSS with React?"
+      },
+      {
+        "role": "assistant",
+        "blocks": [
+          {
+            "type": "text",
+            "content": "Run `npx create-react-app my-app` and install `@tailwindcss/vite` or configure PostCSS."
+          }
+        ]
+      }
+    ]
+  }
+]

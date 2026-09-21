@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Bluebex — Sign up</title>
+<link rel="icon" href="/logo.svg">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0e1014">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body class="auth-body">
+  <div class="auth-card">
+    <a class="brand big" href="/">
+      <img src="/logo.svg" alt="" width="40" height="37">
+      <span class="brand-name">Bluebex</span>
+    </a>
+
+    <p class="hint">Only email registration is supported. One Bluebex account unlocks all services.</p>
+
+    <form id="signupForm">
+      <label class="field">
+        <input id="email" type="email" placeholder="Email address" autocomplete="email" required>
+      </label>
+      <label class="field">
+        <input id="password" type="password" placeholder="Password" autocomplete="new-password" required minlength="6">
+        <button type="button" class="eye" data-target="password"><svg class="ico"><use href="/icons.svg#i-eye"/></svg></button>
+      </label>
+      <label class="field">
+        <input id="confirm" type="password" placeholder="Confirm password" autocomplete="new-password" required minlength="6">
+        <button type="button" class="eye" data-target="confirm"><svg class="ico"><use href="/icons.svg#i-eye"/></svg></button>
+      </label>
+
+      <p class="terms">By signing up, you consent to Bluebex's <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.</p>
+
+      <button type="submit" class="btn-primary">Sign up</button>
+      <p class="error" id="err"></p>
+      <p class="center"><a class="link" href="/login">Log in</a></p>
+    </form>
+  </div>
+
+  <script>
+    document.querySelectorAll('.eye').forEach(b => {
+      b.addEventListener('click', () => {
+        const i = document.getElementById(b.dataset.target);
+        const on = i.type === 'password';
+        i.type = on ? 'text' : 'password';
+        b.querySelector('use').setAttribute('href', on ? '/icons.svg#i-eye-off' : '/icons.svg#i-eye');
+      });
+    });
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const err = document.getElementById('err');
+      err.textContent = '';
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const confirm = document.getElementById('confirm').value;
+      if (password.length < 6) { err.textContent = 'Password must be at least 6 characters'; return; }
+      if (password !== confirm) { err.textContent = 'Passwords do not match'; return; }
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (!res.ok) { err.textContent = data.error || 'Signup failed'; return; }
+      location.href = '/chat';
+    });
+  </script>
+</body>
+</html>

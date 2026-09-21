@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Bluebex</title>
+<link rel="icon" href="/logo.svg">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0e1014">
+<link rel="apple-touch-icon" href="/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body class="app-body">
+
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="side-top">
+      <a class="brand" href="/chat">
+        <img src="/logo.svg" alt="" width="26" height="24">
+        <span class="brand-name">Bluebex</span>
+      </a>
+      <div class="side-top-actions">
+        <button class="icon-btn" id="searchBtn"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+        <button class="icon-btn" id="collapseBtn"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16"/></svg></button>
+      </div>
+    </div>
+
+    <button class="newchat" id="newChatBtn">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
+      <span>New chat</span>
+      <kbd>Ctrl + J</kbd>
+    </button>
+
+    <nav class="convos" id="convos"></nav>
+
+    <div class="side-bottom">
+      <button class="user-btn" id="userBtn">
+        <span class="avatar" id="avatar">U</span>
+        <span class="uname" id="uname">User</span>
+        <svg class="ico" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="icon-btn only-mobile" id="menuBtn"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16"/></svg></button>
+      <h1 class="title" id="chatTitle">New chat</h1>
+      <div class="topbar-actions">
+        <button class="icon-btn" id="shareBtn"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><path d="M12 15V3"/><path d="M8 7l4-4 4 4"/></svg></button>
+      </div>
+    </header>
+
+    <section class="messages" id="messages">
+      <div class="empty">
+        <div class="empty-inner">
+          <img src="/logo.svg" alt="" width="44" height="41">
+          <h2>Hi. What can I do for you?</h2>
+        </div>
+      </div>
+    </section>
+
+    <div class="composer-wrap">
+      <form class="composer" id="composer">
+        <div class="attachments" id="attachments" style="display:none"></div>
+        <textarea id="input" placeholder="Message Bluebex" rows="1"></textarea>
+        <div class="composer-bar">
+          <div class="left-pills">
+            <button type="button" class="pill" id="thinkPill" data-on="false">
+              <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 16 9 5 9-5"/><path d="m3 12 9 5 9-5"/></svg>
+              <span>DeepThink</span>
+            </button>
+            <button type="button" class="pill" id="searchPill" data-on="false">
+              <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c3 3.5 3 14 0 18-3-4-3-14.5 0-18Z"/></svg>
+              <span>Search</span>
+            </button>
+          </div>
+          <div class="right-actions">
+            <button type="button" class="icon-btn" id="clipBtn"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.5 12.5 21a5 5 0 0 1-7-7l8-8a3.5 3.5 0 0 1 5 5l-8 8a2 2 0 0 1-3-3l7-7"/></svg></button>
+            <input type="file" id="fileInput" style="display:none" multiple>
+            <button type="submit" class="send-btn" id="sendBtn" disabled><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+          </div>
+        </div>
+      </form>
+      <p class="foot-note">AI-generated, for reference only</p>
+    </div>
+  </main>
+</div>
+
+<div class="backdrop" id="backdrop" style="display:none"></div>
+
+<!-- ALL overlays created dynamically by JS — nothing here -->
+<div id="overlays"></div>
+
+<script type="module" src="/app.js"></script>
+</body>
+</html>

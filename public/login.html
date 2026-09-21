@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Bluebex — Log in</title>
+<link rel="icon" href="/logo.svg">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0e1014">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body class="auth-body">
+  <div class="auth-card">
+    <a class="brand big" href="/">
+      <img src="/logo.svg" alt="" width="40" height="37">
+      <span class="brand-name">Bluebex</span>
+    </a>
+
+    <form id="loginForm">
+      <label class="field">
+        <input id="email" type="email" placeholder="Phone number / email address" autocomplete="email" required>
+      </label>
+      <label class="field">
+        <input id="password" type="password" placeholder="Password" autocomplete="current-password" required>
+        <button type="button" class="eye" data-target="password"><svg class="ico"><use href="/icons.svg#i-eye"/></svg></button>
+      </label>
+
+      <p class="terms">By signing up or logging in, you consent to Bluebex's <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.</p>
+
+      <div class="row-between">
+        <a class="link" href="#">Forgot password?</a>
+        <a class="link" href="/signup">Sign up</a>
+      </div>
+
+      <button type="submit" class="btn-primary">Log In</button>
+      <p class="error" id="err"></p>
+    </form>
+
+    <div class="alt">
+      <a class="link" href="#">Sign in with Google</a>
+      <a class="link" href="#">Sign in with Apple</a>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.eye').forEach(b => {
+      b.addEventListener('click', () => {
+        const i = document.getElementById(b.dataset.target);
+        const on = i.type === 'password';
+        i.type = on ? 'text' : 'password';
+        b.querySelector('use').setAttribute('href', on ? '/icons.svg#i-eye-off' : '/icons.svg#i-eye');
+      });
+    });
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const err = document.getElementById('err');
+      err.textContent = '';
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: document.getElementById('email').value.trim(),
+          password: document.getElementById('password').value
+        })
+      });
+      const data = await res.json();
+      if (!res.ok) { err.textContent = data.error || 'Login failed'; return; }
+      location.href = '/chat';
+    });
+  </script>
+</body>
+</html>

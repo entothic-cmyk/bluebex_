@@ -1,0 +1,31 @@
+{
+  "id": "b11e8f1b6f1188d14e543996",
+  "email": "entothic@gmail.com",
+  "name": "entothic",
+  "passwordHash": "$2a$10$vtFrTeL9muN/7j9SjsO6o.b/OQsW3u32USRtdK/4tn1haJ/1tckSW",
+  "tokenVersion": 0,
+  "createdAt": "2026-09-21T05:12:32.493Z",
+  "conversations": [
+    {
+      "id": "bf83dc44f2ed2c3c",
+      "title": "hei",
+      "createdAt": "2026-09-21T05:34:23.767Z"
+    },
+    {
+      "id": "b56ab2af58785565",
+      "title": "New chat",
+      "createdAt": "2026-09-21T05:38:32.921Z"
+    },
+    {
+      "id": "9906f1587f2c9c44",
+      "title": "can u generate images",
+      "createdAt": "2026-09-21T05:38:38.546Z"
+    }
+  ],
+  "settings": {
+    "theme": "dark",
+    "language": "en",
+    "voice": "System",
+    "improveModel": true
+  }
+}
